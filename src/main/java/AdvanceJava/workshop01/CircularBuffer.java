@@ -3,53 +3,40 @@ package AdvanceJava.workshop01;
 
 public class CircularBuffer {
 	
-	private int cap = 10;
-	private int current = 0;
-	private String[] buff;
-	private int writePointer = 0;
+	public static final int DEFAULT_SIZE = 10;
 	
-	public static void main(String[] args) {
-        CircularBuffer circularBuffer = new CircularBuffer();
-        circularBuffer.create();
-        int size = circularBuffer.getSize();
-        System.out.println(size);
+	    // Variables
+    private String[] buffers;
+    private int writePointer;
+    private int readPointer;
+
+    // Constructor
+    public CircularBuffer() {}
+
+    // Methods
+    // Public
+    public void create() {
+        create(DEFAULT_SIZE);
     }
-	
-	
-	//Default create
-	public void create() {
-		buff = new String[cap];
-	}
-	
-	public void create(int size) {
-		cap = size;
-		buff = new String[cap];
-	}
-	
-	public int getSize() {
-		return cap;
-	}
-	
-	public void write(String input) throws Exception {
-		int start = writePointer;
-		
-		current++;
-		
-		if(current == cap) {
-			throw new Exception("FullBufferException");
-		}
-		
-		buff[start] = input;
-		writePointer++;
-	}
-	
-	public boolean isEmpty() {
-		for(int i=0; i<buff.length; i++) {
-			if(buff[i] != null) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
+
+    public void create(int size) {
+        buffers = new String[size];
+    }
+
+    public int getSize() {
+        return buffers.length;
+    }
+
+    public boolean isEmpty() {
+        return writePointer - readPointer == 0;
+    }
+
+    public void write(String input) {
+        buffers[writePointer++] = input;
+    }
+
+    public String read() {
+        return buffers[readPointer++];
+    }
+
 }
