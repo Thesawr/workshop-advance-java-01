@@ -1,10 +1,18 @@
-
+import static java.lang.System.out;
 public class CircularBuffer {
 	
 	private int cap = 10;
 	private int current = 0;
 	private String[] buff;
 	private int writePointer = 0;
+	
+	public static void main(String[] args) {
+        CircularBuffer circularBuffer = new CircularBuffer();
+        circularBuffer.create();
+        int size = circularBuffer.getSize();
+        out.println(size);
+    }
+	
 	
 	//Default create
 	public void create() {
