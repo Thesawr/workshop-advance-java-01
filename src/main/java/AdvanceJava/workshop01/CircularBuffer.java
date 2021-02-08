@@ -32,11 +32,11 @@ public class CircularBuffer {
         return writePointer - readPointer == 0;
     }
 
-    public void write(String input) throws Exception {
+    public void write(String input){
         
     	//Check if buffer is full or not
     	if (actualSize == buffers.length) { 
-            throw new Exception("FullBufferException"); 
+            throw new FullBufferException(); 
         } 
     	
         int index = writePointer % buffers.length; 
@@ -48,6 +48,9 @@ public class CircularBuffer {
     }
 
     public String read() {
+    	if (isEmpty()) {
+    		throw new EmptyBufferException();
+    	}
         return buffers[readPointer++];
     }
 

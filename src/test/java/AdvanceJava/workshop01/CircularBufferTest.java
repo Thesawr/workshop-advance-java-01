@@ -32,7 +32,7 @@ public class CircularBufferTest {
 	}
 	
     @Test
-    public void write_A_B_and_read_A_B_then_buffer_is_empty() throws Exception {
+    public void write_A_B_and_read_A_B_then_buffer_is_empty(){
         circularBuffer.create();
         circularBuffer.write("A");
         circularBuffer.write("B");
@@ -60,7 +60,7 @@ public class CircularBufferTest {
 
     @Test
     @DisplayName("หลังจากสร้าง buffer แล้วเพิ่มข้อมูลเข้าไป ผลที่ได้ buffer ต้องไม่ว่าง")
-    public void after_created_and_write_data_should_be_not_empty() throws Exception {
+    public void after_created_and_write_data_should_be_not_empty(){
         circularBuffer.create();
         circularBuffer.write("A");
         boolean status = circularBuffer.isEmpty();
@@ -76,26 +76,29 @@ public class CircularBufferTest {
     }
     
     @Test
-    public void read_exceed_write_should_be_null() throws Exception {
+    public void read_exceed_write_throw_exception(){
     	circularBuffer.create();
         circularBuffer.write("A");
         circularBuffer.write("B");
         circularBuffer.read();
         circularBuffer.read();
-        String status = circularBuffer.read();;
-        assertEquals(null, status);
+        
+        Exception exception = assertThrows(RuntimeException.class, () ->
+        circularBuffer.read());
+        
+        assertEquals("Buffer is empty", exception.getMessage());
     }
     
     @Test
-    public void write_exceed_size_should_throw_exception() throws Exception {
+    public void write_exceed_size_should_throw_exception(){
     	circularBuffer.create(2);
         circularBuffer.write("A");
         circularBuffer.write("B");
 
-        Exception exception = assertThrows(Exception.class, () ->
+        Exception exception = assertThrows(RuntimeException.class, () ->
         circularBuffer.write("C"));
         
-        assertEquals("FullBufferException", exception.getMessage());
+        assertEquals("Buffer is full", exception.getMessage());
         
     }
 
