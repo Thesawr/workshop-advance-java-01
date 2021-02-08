@@ -1,14 +1,14 @@
 
 public class CircularBuffer {
 	
-	private int cap;
+	private int cap = 10;
+	private int current = 0;
 	private String[] buff;
-	private int writePointer;
-	private int readPointer;
+	private int writePointer = 0;
+	private int readPointer = -1;
 	
 	//Default create
 	public void create() {
-		cap = 10;
 		buff = new String[cap];
 	}
 	
@@ -16,4 +16,28 @@ public class CircularBuffer {
 		cap = size;
 		buff = new String[cap];
 	}
+	
+	public int getSize() {
+		return cap;
+	}
+	
+	public void write(String input) throws Exception {
+		int start = writePointer;
+		
+		current++;
+		
+		if(current == cap) {
+			throw new Exception("FullBufferException");
+		}
+	}
+	
+	public boolean isEmpty() {
+		for(int i=0; i<buff.length; i++) {
+			if(buff[i] != null) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }
