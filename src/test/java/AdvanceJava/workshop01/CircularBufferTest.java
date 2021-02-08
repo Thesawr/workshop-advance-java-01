@@ -17,4 +17,15 @@ public class CircularBufferTest {
         //Validate
         assertEquals(10, size);
 	}
+	
+	@Test
+	@DisplayName("Specific = 5")
+	public void create_buffer_with_specific_size() {
+		CircularBuffer circularBuffer = new CircularBuffer();
+        circularBuffer.create(5);
+        int size = circularBuffer.getSize();
+        
+        //Validate
+        assertEquals(5, size);
+	}
 }

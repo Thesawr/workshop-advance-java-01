@@ -1,4 +1,6 @@
-import static java.lang.System.out;
+package AdvanceJava.workshop01;
+
+
 public class CircularBuffer {
 	
 	private int cap = 10;
@@ -10,7 +12,7 @@ public class CircularBuffer {
         CircularBuffer circularBuffer = new CircularBuffer();
         circularBuffer.create();
         int size = circularBuffer.getSize();
-        out.println(size);
+        System.out.println(size);
     }
 	
 	
