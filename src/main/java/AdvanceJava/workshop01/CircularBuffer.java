@@ -5,7 +5,6 @@ public class CircularBuffer {
 	private int current = 0;
 	private String[] buff;
 	private int writePointer = 0;
-	private int readPointer = -1;
 	
 	//Default create
 	public void create() {
