@@ -32,7 +32,7 @@ public class CircularBufferTest {
 	}
 	
     @Test
-    public void write_A_B_and_read_A_B_then_buffer_is_empty() {
+    public void write_A_B_and_read_A_B_then_buffer_is_empty() throws Exception {
         circularBuffer.create();
         circularBuffer.write("A");
         circularBuffer.write("B");
@@ -42,7 +42,7 @@ public class CircularBufferTest {
     }
 
     @Test
-    public void write_A_B_should_read_A_B() {
+    public void write_A_B_should_read_A_B() throws Exception {
         circularBuffer.create();
         circularBuffer.write("A");
         circularBuffer.write("B");
@@ -51,7 +51,7 @@ public class CircularBufferTest {
     }
 
     @Test
-    public void write_A_should_read_A() {
+    public void write_A_should_read_A() throws Exception {
         circularBuffer.create();
         circularBuffer.write("A");
         String result = circularBuffer.read();
@@ -60,7 +60,7 @@ public class CircularBufferTest {
 
     @Test
     @DisplayName("หลังจากสร้าง buffer แล้วเพิ่มข้อมูลเข้าไป ผลที่ได้ buffer ต้องไม่ว่าง")
-    public void after_created_and_write_data_should_be_not_empty() {
+    public void after_created_and_write_data_should_be_not_empty() throws Exception {
         circularBuffer.create();
         circularBuffer.write("A");
         boolean status = circularBuffer.isEmpty();
@@ -76,7 +76,7 @@ public class CircularBufferTest {
     }
     
     @Test
-    public void read_exceed_write_should_be_null() {
+    public void read_exceed_write_should_be_null() throws Exception {
     	circularBuffer.create();
         circularBuffer.write("A");
         circularBuffer.write("B");
@@ -84,6 +84,19 @@ public class CircularBufferTest {
         circularBuffer.read();
         String status = circularBuffer.read();;
         assertEquals(null, status);
+    }
+    
+    @Test
+    public void write_exceed_size_should_throw_exception() throws Exception {
+    	circularBuffer.create(2);
+        circularBuffer.write("A");
+        circularBuffer.write("B");
+
+        Exception exception = assertThrows(Exception.class, () ->
+        circularBuffer.write("C"));
+        
+        assertEquals("FullBufferException", exception.getMessage());
+        
     }
 
 }
