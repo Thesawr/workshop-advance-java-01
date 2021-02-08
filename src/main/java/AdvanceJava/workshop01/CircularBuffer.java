@@ -29,6 +29,9 @@ public class CircularBuffer {
 		if(current == cap) {
 			throw new Exception("FullBufferException");
 		}
+		
+		buff[start] = input;
+		writePointer++;
 	}
 	
 	public boolean isEmpty() {
